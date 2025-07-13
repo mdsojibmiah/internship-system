@@ -1,10 +1,10 @@
 <?php
+include '../../config/db.php'; 
 session_start();
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'company') {
   header('Location: ../auth/login.php');
   exit();
 }
-require_once '../../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $company_id = $_SESSION['user']['id'];
@@ -15,9 +15,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $stipend = $_POST['stipend'];
   $deadline = $_POST['deadline'];
 
-  $stmt = $pdo->prepare("INSERT INTO internships (company_id, title, description, category, duration, stipend, deadline)
-                         VALUES (?, ?, ?, ?, ?, ?, ?)");
-  $stmt->execute([$company_id, $title, $desc, $category, $duration, $stipend, $deadline]);
+  // Prepare statement
+  $sql = "INSERT INTO internships (company_id, title, description, category, duration, stipend, deadline) VALUES (?, ?, ?, ?, ?, ?, ?)";
+  $stmt = mysqli_prepare($conn, $sql);
+
+  // Bind parameters (all strings except company_id which is int)
+  mysqli_stmt_bind_param($stmt, "issssss", $company_id, $title, $desc, $category, $duration, $stipend, $deadline);
+
+  // Execute statement
+  mysqli_stmt_execute($stmt);
+
+  // Close statement
+  mysqli_stmt_close($stmt);
 
   header("Location: dashboard.php");
   exit();
@@ -29,8 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <title>Post Internship</title>
   <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Font: Poppins -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Google Font: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Poppins', sans-serif;

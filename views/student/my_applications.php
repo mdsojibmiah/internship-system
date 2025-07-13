@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../config/db.php';
+include '../../config/db.php';
 
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'student') {
     header('Location: ../auth/login.php');
@@ -9,14 +9,22 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'student') {
 
 $student_id = $_SESSION['user']['id'];
 
-$stmt = $pdo->prepare("SELECT a.*, i.title, i.deadline, u.name AS company_name
-                      FROM applications a
-                      JOIN internships i ON a.internship_id = i.id
-                      JOIN users u ON i.company_id = u.id
-                      WHERE a.student_id = ?");
-$stmt->execute([$student_id]);
-$applications = $stmt->fetchAll();
+$sql = "SELECT a.*, i.title, i.deadline, u.name AS company_name
+        FROM applications a
+        JOIN internships i ON a.internship_id = i.id
+        JOIN users u ON i.company_id = u.id
+        WHERE a.student_id = $student_id";
+
+$result = mysqli_query($conn, $sql);
+$applications = [];
+
+if ($result) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $applications[] = $row;
+    }
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

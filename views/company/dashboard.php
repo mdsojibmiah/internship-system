@@ -1,21 +1,29 @@
 <?php
-// Start session and check if company user is logged in
+include '../../config/db.php'; 
+
 session_start();
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'company') {
     header('Location: ../auth/login.php');
     exit();
 }
 
-// Database connection
-require_once '../../config/db.php';
 
-// Get logged in company ID
 $company_id = $_SESSION['user']['id'];
 
-// Fetch internships posted by the company
-$stmt = $pdo->prepare("SELECT * FROM internships WHERE company_id = ?");
-$stmt->execute([$company_id]);
-$internships = $stmt->fetchAll();
+// Fetch internships posted by the company using MySQLi
+$sql = "SELECT * FROM internships WHERE company_id = ?";
+$stmt = mysqli_prepare($conn, $sql);
+mysqli_stmt_bind_param($stmt, "i", $company_id);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+
+$internships = [];
+if ($result) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $internships[] = $row;
+    }
+}
+mysqli_stmt_close($stmt);
 ?>
 
 <!DOCTYPE html>

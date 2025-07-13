@@ -1,27 +1,39 @@
 <?php
-// File: admin/internship_approval.php
-
+include '../../config/db.php';
 session_start();
-require_once '../../config/db.php';
 
+// Admin login check
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     header('Location: ../auth/login.php');
     exit();
 }
 
 // Approve or reject post
-if (isset($_GET['action'], $_GET['id'])) {
+if (isset($_GET['action']) && isset($_GET['id'])) {
     $status = $_GET['action'] === 'approve' ? 'approved' : 'rejected';
-    $stmt = $pdo->prepare("UPDATE internships SET status = ? WHERE id = ?");
-    $stmt->execute([$status, $_GET['id']]);
+    $id = $_GET['id'];
+
+    $sql = "UPDATE internships SET status = '$status' WHERE id = $id";
+    mysqli_query($conn, $sql);
+
     header("Location: internship_approval.php");
     exit();
 }
 
-// Fetch all internships
-$stmt = $pdo->query("SELECT i.*, u.name AS company_name FROM internships i JOIN users u ON i.company_id = u.id ORDER BY i.created_at DESC");
-$posts = $stmt->fetchAll();
+// Fetch all internships with company name
+$sql = "SELECT i.*, u.name AS company_name 
+        FROM internships i 
+        JOIN users u ON i.company_id = u.id 
+        ORDER BY i.created_at DESC";
+
+$result = mysqli_query($conn, $sql);
+
+$posts = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    $posts[] = $row;
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

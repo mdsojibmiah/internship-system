@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../config/db.php';
+include '../../config/db.php';
 
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'student') {
     header('Location: ../auth/login.php');
@@ -10,14 +10,24 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'student') {
 $internship_id = $_GET['id'];
 $student_id = $_SESSION['user']['id'];
 
-// Prevent duplicate application
-$stmt = $pdo->prepare("SELECT * FROM applications WHERE internship_id = ? AND student_id = ?");
-$stmt->execute([$internship_id, $student_id]);
+// Prepare and check duplicate application
+$sql_check = "SELECT * FROM applications WHERE internship_id = ? AND student_id = ?";
+$stmt = mysqli_prepare($conn, $sql_check);
+mysqli_stmt_bind_param($stmt, "ii", $internship_id, $student_id);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_store_result($stmt);
 
-if ($stmt->rowCount() == 0) {
-    $apply = $pdo->prepare("INSERT INTO applications (internship_id, student_id) VALUES (?, ?)");
-    $apply->execute([$internship_id, $student_id]);
+if (mysqli_stmt_num_rows($stmt) == 0) {
+    // Insert new application
+    $sql_insert = "INSERT INTO applications (internship_id, student_id) VALUES (?, ?)";
+    $stmt_insert = mysqli_prepare($conn, $sql_insert);
+    mysqli_stmt_bind_param($stmt_insert, "ii", $internship_id, $student_id);
+    mysqli_stmt_execute($stmt_insert);
+    mysqli_stmt_close($stmt_insert);
 }
+
+mysqli_stmt_close($stmt);
 
 header('Location: my_applications.php');
 exit();
+?>

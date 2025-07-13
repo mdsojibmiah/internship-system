@@ -1,19 +1,28 @@
 <?php
 session_start();
-require_once '../../config/db.php';
+include '../../config/db.php';
 
+// Admin Login Check
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     header('Location: ../auth/login.php');
     exit();
 }
 
-$stmt = $pdo->query("SELECT a.*, u.name AS student_name, i.title AS internship_title
-                    FROM applications a
-                    JOIN users u ON a.student_id = u.id
-                    JOIN internships i ON a.internship_id = i.id
-                    ORDER BY a.applied_at DESC");
-$apps = $stmt->fetchAll();
+// Fetch all internship applications
+$sql = "SELECT a.*, u.name AS student_name, i.title AS internship_title
+        FROM applications a
+        JOIN users u ON a.student_id = u.id
+        JOIN internships i ON a.internship_id = i.id
+        ORDER BY a.applied_at DESC";
+
+$result = mysqli_query($conn, $sql);
+
+$apps = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    $apps[] = $row;
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

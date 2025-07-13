@@ -163,7 +163,7 @@
 <!-- Why Choose Us Section -->
 <section class="bg-indigo-50 py-20">
   <div class="max-w-7xl mx-auto px-6 text-center">
-    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12">Why Choose <span class="text-indigo-900">InternshipSys</span>?</h2>
+    <h2 class="text-4xl font-extrabold text-indigo-700 mb-12">Why Choose <span class="text-indigo-900">Internship</span>?</h2>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 text-left">
       
@@ -405,7 +405,7 @@
       </div>
 
       <!-- Pagination -->
-      <div class="swiper-pagination mt-6"></div>
+      <div class="swiper-pagination mt-12"></div>
     </div>
   </div>
 </section>

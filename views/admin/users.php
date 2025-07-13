@@ -1,15 +1,24 @@
 <?php
+include '../../config/db.php';
 session_start();
-require_once '../../config/db.php';
 
+
+// Admin login check
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     header('Location: ../auth/login.php');
     exit();
 }
 
-$stmt = $pdo->query("SELECT * FROM users ORDER BY role, name");
-$users = $stmt->fetchAll();
+// Fetch all users ordered by role and name
+$sql = "SELECT * FROM users ORDER BY role, name";
+$result = mysqli_query($conn, $sql);
+
+$users = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    $users[] = $row;
+}
 ?>
+
 
 <!DOCTYPE html>
 <html>

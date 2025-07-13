@@ -1,17 +1,30 @@
 <?php
+include '../../config/db.php';
 session_start();
-require_once '../../config/db.php';
 
+
+// Admin check
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     header('Location: ../auth/login.php');
     exit();
 }
 
-$stmt = $pdo->query("SELECT i.*, u.name AS company_name 
-                     FROM internships i JOIN users u ON i.company_id = u.id
-                     ORDER BY i.created_at DESC");
-$posts = $stmt->fetchAll();
+// Fetch internships with company names
+$sql = "SELECT i.*, u.name AS company_name 
+        FROM internships i 
+        JOIN users u ON i.company_id = u.id 
+        ORDER BY i.created_at DESC";
+
+$result = mysqli_query($conn, $sql);
+
+$posts = [];
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $posts[] = $row;
+    }
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

@@ -1,18 +1,29 @@
 <?php
 session_start();
-require_once '../../config/db.php';
+include '../../config/db.php';
 
+// Check if user is student
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'student') {
     header('Location: ../auth/login.php');
     exit();
 }
 
-$stmt = $pdo->query("SELECT i.*, u.name AS company_name 
-                    FROM internships i
-                    JOIN users u ON i.company_id = u.id
-                    ORDER BY i.deadline ASC");
-$internships = $stmt->fetchAll();
+// Fetch internships with company name
+$sql = "SELECT i.*, u.name AS company_name 
+        FROM internships i 
+        JOIN users u ON i.company_id = u.id 
+        ORDER BY i.deadline ASC";
+
+$result = mysqli_query($conn, $sql);
+$internships = [];
+
+if ($result) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $internships[] = $row;
+    }
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

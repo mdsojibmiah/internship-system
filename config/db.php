@@ -1,14 +1,13 @@
 <?php
-$host = 'localhost';
-$db   = 'internship_system';
-$user = 'root';
-$pass = '';         
+$host = "localhost";
+$user = "root";
+$pass = "";
+$dbname = "internship_system";
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
-    // Enable exceptions
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("DB Connection Failed: " . $e->getMessage());
+$conn = mysqli_connect($host, $user, $pass, $dbname);
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
 ?>
+

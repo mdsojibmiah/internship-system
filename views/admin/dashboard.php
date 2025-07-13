@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../config/db.php';
+include '../../config/db.php';
 
 // Check if admin is logged in
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
@@ -8,13 +8,14 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     exit();
 }
 
-// Fetch all required statistics
-$users = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
-$students = $pdo->query("SELECT COUNT(*) FROM users WHERE role = 'student'")->fetchColumn();
-$companies = $pdo->query("SELECT COUNT(*) FROM users WHERE role = 'company'")->fetchColumn();
-$internships = $pdo->query("SELECT COUNT(*) FROM internships")->fetchColumn();
-$applications = $pdo->query("SELECT COUNT(*) FROM applications")->fetchColumn();
+// Fetch all statistics using mysqli
+$users = mysqli_fetch_row(mysqli_query($conn, "SELECT COUNT(*) FROM users"))[0];
+$students = mysqli_fetch_row(mysqli_query($conn, "SELECT COUNT(*) FROM users WHERE role = 'student'"))[0];
+$companies = mysqli_fetch_row(mysqli_query($conn, "SELECT COUNT(*) FROM users WHERE role = 'company'"))[0];
+$internships = mysqli_fetch_row(mysqli_query($conn, "SELECT COUNT(*) FROM internships"))[0];
+$applications = mysqli_fetch_row(mysqli_query($conn, "SELECT COUNT(*) FROM applications"))[0];
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

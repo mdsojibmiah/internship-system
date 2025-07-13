@@ -1,32 +1,47 @@
 <?php
 session_start();
-require_once '../../config/db.php';
+include '../../config/db.php';
 
+// Admin login check
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     header('Location: ../auth/login.php');
     exit();
 }
 
+// Check internship_id
 if (!isset($_GET['internship_id'])) {
     die('Internship ID not provided');
 }
 
 $internship_id = $_GET['internship_id'];
 
-// Internship details
-$stmt = $pdo->prepare("SELECT i.*, u.name AS company_name FROM internships i JOIN users u ON i.company_id = u.id WHERE i.id = ?");
-$stmt->execute([$internship_id]);
-$internship = $stmt->fetch();
+// Internship details query
+$internship_sql = "SELECT i.*, u.name AS company_name 
+                   FROM internships i 
+                   JOIN users u ON i.company_id = u.id 
+                   WHERE i.id = $internship_id";
+
+$internship_result = mysqli_query($conn, $internship_sql);
+$internship = mysqli_fetch_assoc($internship_result);
 
 if (!$internship) {
     die('Internship not found');
 }
 
 // Applicants list
-$stmt = $pdo->prepare("SELECT a.*, s.name AS student_name, s.email FROM applications a JOIN users s ON a.student_id = s.id WHERE a.internship_id = ?");
-$stmt->execute([$internship_id]);
-$applicants = $stmt->fetchAll();
+$applicants_sql = "SELECT a.*, s.name AS student_name, s.email 
+                   FROM applications a 
+                   JOIN users s ON a.student_id = s.id 
+                   WHERE a.internship_id = $internship_id";
+
+$applicants_result = mysqli_query($conn, $applicants_sql);
+
+$applicants = [];
+while ($row = mysqli_fetch_assoc($applicants_result)) {
+    $applicants[] = $row;
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
