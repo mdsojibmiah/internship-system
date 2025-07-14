@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['resume'])) {
     // Check if file is PDF
     $fileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
     if ($fileType !== 'pdf') {
-        $message = "❌ Only PDF files are allowed.";
+        $message = " Only PDF files are allowed.";
         $messageClass = "text-red-600 bg-red-100 border border-red-200";
     } else {
         if (move_uploaded_file($_FILES["resume"]["tmp_name"], $target_file)) {
@@ -50,10 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['resume'])) {
 
             mysqli_stmt_close($stmt_check);
 
-            $message = "✅ Resume uploaded successfully!";
+            $message = "Resume uploaded successfully!";
             $messageClass = "text-green-600 bg-green-100 border border-green-200";
         } else {
-            $message = "❌ Failed to upload resume.";
+            $message = "Failed to upload resume.";
             $messageClass = "text-red-600 bg-red-100 border border-red-200";
         }
     }

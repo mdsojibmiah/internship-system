@@ -47,11 +47,11 @@ mysqli_stmt_close($stmt);
     
     <!-- Sidebar -->
     <aside class="bg-white shadow-md w-full md:w-64 p-6 sticky top-0 md:h-screen">
-      <h1 class="text-2xl font-bold text-indigo-700 mb-8">🏢 Dashboard</h1>
+      <h1 class="text-2xl font-bold text-indigo-700 mb-8"> Dashboard</h1>
       <ul class="space-y-4 text-gray-700">
-        <li><a href="dashboard.php" class="block px-4 py-2 rounded hover:bg-indigo-100">📄 Internship Posts</a></li>
-        <li><a href="post_create.php" class="block px-4 py-2 rounded hover:bg-indigo-100">➕ Create New Post</a></li>
-        <li><a href="../auth/logout.php" class="block px-4 py-2 text-red-500 hover:bg-red-100">🚪 Logout</a></li>
+        <li><a href="dashboard.php" class="block px-4 py-2 rounded hover:bg-indigo-100"> Internship Posts</a></li>
+        <li><a href="post_create.php" class="block px-4 py-2 rounded hover:bg-indigo-100"> Create New Post</a></li>
+        <li><a href="../auth/logout.php" class="block px-4 py-2 text-red-500 hover:bg-red-100"> Logout</a></li>
       </ul>
     </aside>
 

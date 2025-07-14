@@ -6,12 +6,12 @@
   <title>Internship Management System</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/feather-icons"></script>
-  <!-- In <head> tag -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-/>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- Slider Swiper -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <!-- Google Font: Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -391,7 +391,7 @@
             </svg>
           </div>
           <blockquote class="italic text-gray-600 text-lg mb-4">
-            "InternshipSys gave me direction and made the process super easy."
+            "Internship gave me direction and made the process super easy."
           </blockquote>
           <p class="text-indigo-700 font-semibold">— Faisal A.</p>
         </div>
@@ -405,7 +405,7 @@
       </div>
 
       <!-- Pagination -->
-      <div class="swiper-pagination mt-12"></div>
+      <div class="swiper-pagination mt-6 !text-indigo-600"></div>
     </div>
   </div>
 </section>
@@ -503,7 +503,7 @@
       </div>
     </div>
     <div class="text-center mt-10 text-gray-500 text-sm">
-      &copy; <?= date('Y') ?> InternshipSys. All rights reserved.
+      &copy; <?= date('Y') ?> Internship. All rights reserved.
     </div>
   </footer>
 

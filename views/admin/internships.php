@@ -45,7 +45,7 @@ if (mysqli_num_rows($result) > 0) {
   <!-- Navbar -->
   <nav class="bg-white shadow-md sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <h1 class="text-xl font-bold text-indigo-700">📋 All Internship Posts</h1>
+      <h1 class="text-xl font-bold text-indigo-700">All Internship Posts</h1>
       <a href="dashboard.php" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded transition">← Back to Dashboard</a>
     </div>
   </nav>

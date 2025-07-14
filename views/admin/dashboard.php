@@ -39,57 +39,57 @@ $applications = mysqli_fetch_row(mysqli_query($conn, "SELECT COUNT(*) FROM appli
     <!-- Sidebar -->
     <aside class="bg-white shadow-lg lg:w-64 w-full lg:h-screen p-5 space-y-4 sticky top-0 z-40">
       <div class="flex justify-between items-center lg:block">
-        <h1 class="text-2xl font-bold text-indigo-700">🛡️ Admin</h1>
+        <h1 class="text-2xl font-bold text-indigo-700">Admin</h1>
         <button id="menu-toggle" class="lg:hidden text-gray-600 focus:outline-none">
           ☰
         </button>
       </div>
       <nav id="menu" class="mt-8 lg:mt-4 space-y-2 hidden lg:block">
-        <a href="dashboard.php" class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">📊 Dashboard</a>
-        <a href="users.php" class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">👥 Manage Users</a>
-        <a href="internships.php" class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">📢 Internships</a>
-        <a href="applications.php" class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">📄 Applications</a>
-        <a href="../auth/logout.php" class="block px-4 py-2 text-red-500 hover:bg-red-100 font-semibold">🚪 Logout</a>
+        <a href="dashboard.php" class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Dashboard</a>
+        <a href="users.php" class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Manage Users</a>
+        <a href="internships.php" class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Internships</a>
+        <a href="applications.php" class="block px-4 py-2 rounded hover:bg-indigo-100 text-gray-700">Applications</a>
+        <a href="../auth/logout.php" class="block px-4 py-2 text-red-500 hover:bg-red-100 font-semibold">Logout</a>
       </nav>
     </aside>
 
     <!-- Main Content -->
     <main class="flex-1 p-6">
       <div class="flex flex-col sm:flex-row justify-between items-center mb-8">
-        <h2 class="text-3xl font-bold text-gray-800">📊 Dashboard Overview</h2>
+        <h2 class="text-3xl font-bold text-gray-800">Dashboard Overview</h2>
         <span class="text-gray-600">Welcome, <?= htmlspecialchars($_SESSION['user']['name']) ?></span>
       </div>
 
       <!-- Cards -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
         <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
-          <h3 class="text-lg font-semibold text-gray-700">👥 Total Users</h3>
+          <h3 class="text-lg font-semibold text-gray-700">Total Users</h3>
           <p class="text-3xl font-bold text-indigo-600 mt-2"><?= $users ?></p>
         </div>
         <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
-          <h3 class="text-lg font-semibold text-gray-700">🎓 Students</h3>
+          <h3 class="text-lg font-semibold text-gray-700">Students</h3>
           <p class="text-3xl font-bold text-green-600 mt-2"><?= $students ?></p>
         </div>
         <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
-          <h3 class="text-lg font-semibold text-gray-700">🏢 Companies</h3>
+          <h3 class="text-lg font-semibold text-gray-700">Companies</h3>
           <p class="text-3xl font-bold text-yellow-600 mt-2"><?= $companies ?></p>
         </div>
         <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
-          <h3 class="text-lg font-semibold text-gray-700">📢 Internship Posts</h3>
+          <h3 class="text-lg font-semibold text-gray-700">Internship Posts</h3>
           <p class="text-3xl font-bold text-purple-600 mt-2"><?= $internships ?></p>
         </div>
         <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition">
-          <h3 class="text-lg font-semibold text-gray-700">📄 Applications</h3>
+          <h3 class="text-lg font-semibold text-gray-700">Applications</h3>
           <p class="text-3xl font-bold text-red-600 mt-2"><?= $applications ?></p>
         </div>
       </div>
 
       <!-- Quick Actions -->
-      <h3 class="text-2xl font-semibold text-gray-800 mb-5">⚡ Quick Actions</h3>
+      <h3 class="text-2xl font-semibold text-gray-800 mb-5">Quick Actions</h3>
       <div class="flex flex-col sm:flex-row sm:flex-wrap gap-4">
-        <a href="users.php" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded shadow w-full sm:w-auto text-center">👥 Manage Users</a>
-        <a href="internships.php" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded shadow w-full sm:w-auto text-center">📢 View Internships</a>
-        <a href="applications.php" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded shadow w-full sm:w-auto text-center">📄 View Applications</a>
+        <a href="users.php" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded shadow w-full sm:w-auto text-center">Manage Users</a>
+        <a href="internships.php" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded shadow w-full sm:w-auto text-center">View Internships</a>
+        <a href="applications.php" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded shadow w-full sm:w-auto text-center">View Applications</a>
       </div>
     </main>
   </div>

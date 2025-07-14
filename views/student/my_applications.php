@@ -92,7 +92,7 @@ if ($result) {
     </div>
   <?php else: ?>
     <div class="text-center text-gray-600 text-lg mt-20">
-      😕 You haven’t applied to any internships yet.<br>
+      You haven’t applied to any internships yet.<br>
       <a href="dashboard.php" class="text-indigo-600 hover:underline font-medium">Browse internships now →</a>
     </div>
   <?php endif; ?>

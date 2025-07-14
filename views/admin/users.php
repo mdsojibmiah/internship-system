@@ -29,7 +29,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 </head>
 <body class="bg-gray-100 p-4 sm:p-10">
   <div class="max-w-6xl mx-auto">
-    <h2 class="text-2xl font-bold mb-4 sm:mb-6">👥 All Registered Users</h2>
+    <h2 class="text-2xl font-bold mb-4 sm:mb-6">All Registered Users</h2>
     <a href="dashboard.php" class="text-blue-600 mb-6 inline-block">← Back to Dashboard</a>
 
     <!-- Large Screen Table -->
@@ -68,7 +68,7 @@ while ($row = mysqli_fetch_assoc($result)) {
           <p><span class="font-semibold">Name:</span> <?= htmlspecialchars($user['name']) ?></p>
           <p><span class="font-semibold">Email:</span> <?= htmlspecialchars($user['email']) ?></p>
           <p><span class="font-semibold">Role:</span> <?= ucfirst($user['role']) ?></p>
-          <a href="delete_user.php?id=<?= $user['id'] ?>" class="text-red-500 font-semibold inline-block mt-2" onclick="return confirm('Delete user?')">🗑️ Delete</a>
+          <a href="delete_user.php?id=<?= $user['id'] ?>" class="text-red-500 font-semibold inline-block mt-2" onclick="return confirm('Delete user?')"> Delete</a>
         </div>
       <?php endforeach; ?>
     </div>
